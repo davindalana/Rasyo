@@ -12,6 +12,8 @@ public class Movement : MonoBehaviour
     [SerializeField]
     private float dashSpeed =25f, dashDuration = 0.1f, dashCd = 1f;
     public bool isDash,canDash;
+    [SerializeField]
+    private TrailRenderer mtr;
     void Start()
     {
         canDash = true;
@@ -36,6 +38,7 @@ public class Movement : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space) && canDash)
         {
+            mtr.emitting = true;
             StartCoroutine(Dash());
         }
     }
@@ -53,6 +56,7 @@ public class Movement : MonoBehaviour
         isDash = true;
         rb.velocity = new Vector2(moveDirection.x * dashSpeed, moveDirection.y * dashSpeed);
         yield return new WaitForSeconds(dashDuration);
+        mtr.emitting = false;    
         isDash = false;
         yield return new WaitForSeconds(dashCd);
         canDash = true;
