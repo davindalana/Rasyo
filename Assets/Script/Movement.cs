@@ -53,7 +53,6 @@ public class Movement : MonoBehaviour
         isDash = true;
         rb.velocity = new Vector2(moveDirection.x * dashSpeed, moveDirection.y * dashSpeed);
         yield return new WaitForSeconds(dashDuration);
-
         isDash = false;
         yield return new WaitForSeconds(dashCd);
         canDash = true;
